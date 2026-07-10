@@ -751,12 +751,8 @@ function attachSeqSelectionHandler(tr) {
         var endBase   = parseFloat(tr.basecallPos[endIdx]);
         if (!isFinite(startBase) || !isFinite(endBase)) return;
 
-        var selSpan = Math.max(1, endBase - startBase + 1);
-        var spanWithMargin = Math.max(10, selSpan * 1.2);
-        var centerBase = (startBase + endBase) / 2;
-
-        winXst = centerBase - spanWithMargin / 2;
-        winXend = centerBase + spanWithMargin / 2;
+        winXst = startBase - 1;
+        winXend = endBase + 1;
 
         checkWindow(tr.peakA.length - 1);
         SVGRepaint();
