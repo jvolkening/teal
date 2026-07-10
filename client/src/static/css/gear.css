@@ -84,3 +84,9 @@ a.plain:hover {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+#traceView-traceSeqView {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

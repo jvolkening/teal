@@ -17,10 +17,13 @@
 //  }
 //
 
-module.exports = {
-    displayData: displayData,
-    deleteContent: deleteContent
-};
+// ignore in non-Node environments
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = {
+        displayData: displayData,
+        deleteContent: deleteContent
+    };
+}
 
 // Global Values
 var winXst;
@@ -313,9 +316,9 @@ function createSVG(tr,startX,endX,endY,wdXst,wdXend,wdYst,wdYend) {
     retVal += "</svg>";
     var head;
     if (tr.hasOwnProperty('refalign')) {
-        head = "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='360' viewBox='-60 -40 1200 360'>";
+        head = "<svg id='trace' xmlns='http://www.w3.org/2000/svg' width='" + frameXend + "' height='360' viewBox='-50 -40 " + (frameXend+50) + " 360'>";
     } else {
-        head = "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='300' viewBox='-60 -40 1200 300'>";
+        head = "<svg id='trace' xmlns='http://www.w3.org/2000/svg' width='" + frameXend + "' height='300' viewBox='-50 -40 " + (frameXend+50) + " 300'>";
     }
     return head + retVal;
 }
@@ -539,6 +542,7 @@ function displayData(res) {
     SVGRepaint();
     var trBtn = document.getElementById('traceView-Buttons');
     showElement(trBtn);
+    handleResizeEnd();
 }
 
 function deleteContent() {
@@ -556,6 +560,14 @@ function deleteContent() {
     hideElement(refSeq);
     var outField2 = document.getElementById('traceView-refSeq')
     outField2.value = "";
+}
+
+// Recalculates SVG width based on window width
+function handleResizeEnd() {
+    frameXend = getContentDims(
+        document.getElementById('traceView-Traces')
+    ).width;
+    SVGRepaint();
 }
 
 // Drag handlers (direction inverted: drag right -> earlier bases)
@@ -623,6 +635,15 @@ function attachDragHandlers() {
     }
     window.addEventListener('mouseup', stopDrag);
     window.addEventListener('mouseleave', stopDrag);
+
+    // recalculate and redraw SVG to fit window (with debounce)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            handleResizeEnd();
+        }, 250); // Delay in milliseconds
+    });
 }
 
 // Mouse wheel zoom (over the trace view)
@@ -766,17 +787,24 @@ function renderSeqView(tr) {
     var maxX = tr.peakA.length - 1;
 
     checkWindow(maxX);
+    startSel = false;
     for (var i=0;i<len;i++){
-        if (i > 0 && i % wrapLen === 0) {
-            html.push('<br>');
-        }
         var b = traceSeqString.charAt(i);
         var posVal = parseFloat(tr.basecallPos[i]);
         var inView = (posVal >= winXst && posVal <= winXend);
-        var cls = inView ? 'text-primary font-weight-bold' : '';
-        html.push('<span data-idx="'+i+'" class="'+cls+'">'+escapeHtml(b)+'</span>');
+        var cls = inView ? 'text-primary font-weight-bold seq-base' : 'seq-base';
+        var id_str = ' ';
+        if (inView && ! startSel) {
+            id_str = ' id="seqview-selection"';
+            startSel = true;
+        }
+        html.push('<span' + id_str + ' data-idx="'+i+'" class="'+cls+'">'+escapeHtml(b)+'</span>');
     }
     view.innerHTML = html.join('');
+    document.getElementById('seqview-selection').scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+    });
 }
 
 // Highlight update wrapper
@@ -825,3 +853,20 @@ function fallbackCopy(text) {
 
 // Escape helper
 function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+// Get actual dimensions of element's content
+function getContentDims(ele) {
+
+    const c_w = ele.clientWidth;
+    const c_h = ele.clientHeight;
+    const styles = window.getComputedStyle(ele);
+    const p_t = parseFloat(styles.paddingTop);
+    const p_b = parseFloat(styles.paddingBottom);
+    const p_l = parseFloat(styles.paddingLeft);
+    const p_r = parseFloat(styles.paddingRight);
+    return {
+        width: c_w - p_l - p_r,
+        height: c_h - p_t - p_b
+    };
+
+}
