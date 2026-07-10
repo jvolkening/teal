@@ -60,10 +60,10 @@ function createButtons() {
     var html = '<div id="traceView-Buttons" class="d-none">';
     html += '  <button id="traceView-nav-bw-win" class="btn btn-outline-secondary">prev</button>';
     html += '  <button id="traceView-nav-bw-bit" class="btn btn-outline-secondary">&lt;</button>';
-    html += '  <button id="traceView-nav-zy-in" class="btn btn-outline-secondary">Bigger Peaks</button>';
-    html += '  <button id="traceView-nav-zy-out" class="btn btn-outline-secondary">Smaller Peaks</button>';
-    html += '  <button id="traceView-nav-zx-in" class="btn btn-outline-secondary">Zoom in</button>';
-    html += '  <button id="traceView-nav-zx-out" class="btn btn-outline-secondary">Zoom Out</button>';
+    html += '  <button id="traceView-nav-zy-in" class="btn btn-outline-secondary">Zoom In Y</button>';
+    html += '  <button id="traceView-nav-zy-out" class="btn btn-outline-secondary">Zoom Out Y</button>';
+    html += '  <button id="traceView-nav-zx-in" class="btn btn-outline-secondary">Zoom In X</button>';
+    html += '  <button id="traceView-nav-zx-out" class="btn btn-outline-secondary">Zoom Out X</button>';
     html += '  <button id="traceView-nav-fw-bit" class="btn btn-outline-secondary">&gt;</button>';
     html += '  <button id="traceView-nav-fw-win" class="btn btn-outline-secondary">next</button>';
     html += '  <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>';
