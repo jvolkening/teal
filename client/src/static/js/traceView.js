@@ -437,14 +437,14 @@ function createCoodinates (tr,startX,endX,endY,wdXst,wdXend,wdYst,wdYend){
    
     var sqrY = -20;
     var txtY = -9;
-    retVal += "<rect x='400' y='" + sqrY + "' width='10' height='10' style='fill:green;stroke-width:3;stroke:green' />";
-    retVal += "<text x='417' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>A</text>";
-    retVal += "<rect x='450' y='" + sqrY + "' width='10' height='10' style='fill:blue;stroke-width:3;stroke:blue' />";
-    retVal += "<text x='467' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>C</text>";
-    retVal += "<rect x='500' y='" + sqrY + "' width='10' height='10' style='fill:black;stroke-width:3;stroke:black' />";
-    retVal += "<text x='517' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>G</text>";
-    retVal += "<rect x='550' y='" + sqrY + "' width='10' height='10' style='fill:red;stroke-width:3;stroke:red' />";
-    retVal += "<text x='567' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>T</text>";
+    retVal += "<rect x='0' y='" + sqrY + "' width='10' height='10' style='fill:green;stroke-width:3;stroke:green' />";
+    retVal += "<text x='17' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>A</text>";
+    retVal += "<rect x='50' y='" + sqrY + "' width='10' height='10' style='fill:blue;stroke-width:3;stroke:blue' />";
+    retVal += "<text x='67' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>C</text>";
+    retVal += "<rect x='100' y='" + sqrY + "' width='10' height='10' style='fill:black;stroke-width:3;stroke:black' />";
+    retVal += "<text x='117' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>G</text>";
+    retVal += "<rect x='150' y='" + sqrY + "' width='10' height='10' style='fill:red;stroke-width:3;stroke:red' />";
+    retVal += "<text x='167' y='" + txtY + "' font-family='Arial' font-size='18' fill='black'>T</text>";
 
     return retVal;
 }
