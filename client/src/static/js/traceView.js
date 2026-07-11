@@ -76,7 +76,7 @@ function createButtons() {
     html += '<div id="traceView-Traces"></div>';
     html += '<div id="traceView-tooltip" class="traceView-tooltip d-none" style="position:absolute; pointer-events:none; background:rgba(255,255,255,0.95); border:1px solid #ccc; border-radius:4px; padding:6px 8px; font-size:12px; color:#000; box-shadow:0 2px 6px rgba(0,0,0,0.2); z-index:1000;"></div>';
     html += '<div id="traceView-Sequence" class="d-none">';
-    html += '  <hr>\n  <p>Chromatogram Sequence:</p>';
+    html += '  <div id="sequence-label"><hr>\n  <p>Chromatogram Sequence:</p></div>';
     html += '  <div id="traceView-traceSeqView" class="form-control" style="white-space: pre-wrap; font-family: monospace; min-height: 7em; cursor: text;"></div>';
     html += '  <div class="mt-1 d-flex align-items-center">';
     html += '    <button id="traceView-copy-view" class="btn btn-sm btn-outline-secondary mr-2">Copy view range</button>';

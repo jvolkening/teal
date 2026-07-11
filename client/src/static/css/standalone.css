@@ -21,3 +21,10 @@
 .traceView-base-tick text {
     font-size: 12px;
 }
+#traceView-Traces {
+    height: 240px;
+}
+#sequence-label {
+    display: none;
+}
+
