@@ -90,3 +90,6 @@ a.plain:hover {
     display: flex;
     flex-wrap: wrap;
 }
+#traceView-Traces {
+    height: 300px;
+}

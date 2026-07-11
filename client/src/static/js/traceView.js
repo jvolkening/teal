@@ -318,7 +318,7 @@ function createSVG(tr,startX,endX,endY,wdXst,wdXend,wdYst,wdYend) {
     if (tr.hasOwnProperty('refalign')) {
         head = "<svg id='trace' xmlns='http://www.w3.org/2000/svg' width='" + frameXend + "' height='360' viewBox='-50 -40 " + (frameXend+50) + " 360'>";
     } else {
-        head = "<svg id='trace' xmlns='http://www.w3.org/2000/svg' width='" + frameXend + "' height='300' viewBox='-50 -40 " + (frameXend+50) + " 300'>";
+        head = "<svg id='trace' xmlns='http://www.w3.org/2000/svg' width='" + frameXend + "' height='" + (frameYend+100) + "' viewBox='-50 -40 " + (frameXend+50) + " " + (frameYend+100) + "'>";
     }
     return head + retVal;
 }
@@ -567,6 +567,9 @@ function handleResizeEnd() {
     frameXend = getContentDims(
         document.getElementById('traceView-Traces')
     ).width;
+    frameYend = getContentDims(
+        document.getElementById('traceView-Traces')
+    ).height-100;
     SVGRepaint();
 }
 
